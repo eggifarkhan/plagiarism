@@ -61,7 +61,10 @@
         <div class="col-xl-6 col-lg-8">
           <h1>Login</h1>
             <form>
-                <label style="color:#FFF">Username</label><br>
+                <label style="color:#FFF">Nim</label><br>
+                <input type="text"><br><label style="color:#FFF">Username</label><br>
+                <input type="text"><br>
+                <label style="color:#FFF">Nama</label><br>
                 <input type="text"><br>
                 <label style="color:#FFF">Password</label><br>
                 <input type="password"><br>
