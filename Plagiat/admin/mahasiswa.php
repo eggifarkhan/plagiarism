@@ -258,8 +258,8 @@ if (!isset($_SESSION['nama'])) {
                                             <td><?php echo $d['password'];?></td>
                                             <td><?php echo $d['keterangan'];?></td>
                                             <td>
-                                            <a href="#" class="btn btn-success">Edit</a>
-                                            <a href="#" class="btn btn-danger">Hapus</a>
+                                            <a href="editm.php?id_user=<?php echo $d['id_user'];?>" class="btn btn-success">Edit</a>
+                                            <a href="hapusm.php?id_user=<?php echo $d['id_user'];?>" class="btn btn-danger">Hapus</a>
                                             </td>
                                         </tr>
                                         

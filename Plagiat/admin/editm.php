@@ -5,7 +5,12 @@ session_start();
 if (!isset($_SESSION['nama'])) {
     header("Location: dashboard.php");
 }
-
+?>
+<?php
+include "config.php";
+    $id = $_GET['id_user'];
+    $ambil = mysqli_query($conn,"SELECT * FROM user WHERE id_user='$id'");
+    $data= mysqli_fetch_array($ambil);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -112,6 +117,9 @@ if (!isset($_SESSION['nama'])) {
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
+
+            <!-- Sidebar Message -->
+            
 
         </ul>
         <!-- End of Sidebar -->
@@ -224,44 +232,34 @@ if (!isset($_SESSION['nama'])) {
 
                     <div class="container-fluid">
                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Admin</h6><br>
-                            <a href="tambaha.php" class="btn btn-primary">Tambah Data</a>
+                            <h6 class="m-0 font-weight-bold text-primary">Edit Data Mahasiswa</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama</th>
-                                            <th>Email</th>
-                                            <th>Password</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <?php
-                                    include 'config.php';
-                                    $i = 1;
-                                    $data = mysqli_query($conn, "SELECT * FROM admin");
-                                    while ($d = mysqli_fetch_array($data)) {
-                                    ?>
-                                    <tbody>
-                                        <tr>
-                                            <td><?php echo $i++?></td>
-                                            <td><?php echo $d['nama'];?></td>
-                                            <td><?php echo $d['email'];?></td>
-                                            <td><?php echo $d['password'];?></td>
-                                            <td>
-                                            <a href="edita.php?id_admin=<?php echo $d['id_admin'];?>" class="btn btn-success">Edit</a>
-                                            <a href="hapusa.php?id_admin=<?php echo $d['id_admin'];?>" class="btn btn-danger">Hapus</a>
-                                            </td>
-                                        </tr>
-                                        
-                                    </tbody>
-                                    <?php
-                                }
-                                    ?>
-                                </table>
+                                <form method="POST" action="">
+                                  <div class="mb-3">
+                                    <label  class="form-label">Nim</label>
+                                    <input type="text" name="nim" class="form-control" id="nim" value="<?php echo $data['nim'] ?>" >
+                                  </div>
+                                  <div class="mb-3">
+                                    <label  class="form-label">Nama</label>
+                                    <input type="text" name="nama" class="form-control" id="nama" value="<?php echo $data['nama'] ?>">
+                                  </div>
+                                  <div class="mb-3">
+                                    <label  class="form-label">Email</label>
+                                    <input type="email" name="email" class="form-control" id="email" value="<?php echo $data['email'] ?>">
+                                  </div>
+                                  <div class="mb-3">
+                                    <label  class="form-label">Password</label>
+                                    <input type="text" name="password" class="form-control" id="password" value="<?php echo $data['password'] ?>">
+                                  </div>
+                                  
+                                <div class="mb-3">
+                                <label  class="form-label">Keterangan</label>
+                                <label class="form-control-plaintext" id="keterangan"><?php echo $data['keterangan'] ?></label> 
+                                </div>
+                                  <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -327,3 +325,18 @@ if (!isset($_SESSION['nama'])) {
 </body>
 
 </html>
+
+<?php
+if(isset($_POST['submit'])){
+    $nim       = $_POST['nim'];
+    $nama       = $_POST['nama'];
+    $email       = $_POST['email'];
+    $password      = $_POST['password'];
+
+    mysqli_query($conn, "UPDATE user 
+    SET nim='$nim', nama='$nama', email='$email', password='$password' WHERE id_user='$id' ")
+    or die(mysql_error($conn));
+
+    echo "<meta http-equiv='refresh' content='1;url=http://localhost/plagiarism/plagiat/admin/mahasiswa.php'>";
+}
+?>
