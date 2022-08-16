@@ -246,7 +246,7 @@ if (!isset($_SESSION['nama'])) {
                                 </div>
                                   <div class="mb-3">
                                     <label  class="form-label">file</label>
-                                    <input type="text" name="password" class="form-control" id="password" placeholder="Masukan Password">
+                                    <input type="files" name="file" class="form-control" id="file" placeholder="Masukan Password">
                                   </div>
                                   <button type="submit" class="btn btn-primary" name="submit">Submit</button>
                                 </form>
