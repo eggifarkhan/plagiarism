@@ -5,8 +5,8 @@ session_start();
 if (!isset($_SESSION['nama'])) {
     header("Location: dashboard.php");
 }
-?>
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -135,6 +135,11 @@ if (!isset($_SESSION['nama'])) {
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                            
+
+                        <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -224,32 +229,54 @@ if (!isset($_SESSION['nama'])) {
                     </ul>
 
                 </nav>
-
+                <!-- End of Topbar -->
+                    <!-- Content Row -->
                     <div class="container-fluid">
                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Edit Data Mahasiswa</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Skripsi</h6><br>
+                            <a href="tambahs.php" class="btn btn-primary">Tambah Data</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <form method="POST" action="">
-                                  <div class="mb-3">
-                                    <label  class="form-label">Nama</label>
-                                    <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukan Nama">
-                                  </div>
-                                  <div class="mb-3">
-                                  <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                                  <input type="email" name="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                                </div>
-                                  <div class="mb-3">
-                                    <label  class="form-label">Password</label>
-                                    <input type="text" name="password" class="form-control" id="password" placeholder="Masukan Password">
-                                  </div>
-                                  <button type="submit" class="btn btn-primary" name="submit">Submit</button>
-                                </form>
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Judul</th>
+                                            <th>Penulis</th>
+                                            <th>Tahun</th>
+                                            <th>File</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <?php
+                                    include 'config.php';
+                                    $i = 1;
+                                    $data = mysqli_query($conn, "SELECT * FROM data_skripsi");
+                                    while ($d = mysqli_fetch_array($data)) {
+                                    ?>
+                                    <tbody>
+                                        <tr>
+                                            <td><?php echo $i++?></td>
+                                            <td><?php echo $d['judul'];?></td>
+                                            <td><?php echo $d['penulis'];?></td>
+                                            <td><?php echo $d['tahun'];?></td>
+                                            <td><?php echo $d['file'];?></td>
+                                            <td>
+                                            <a href="edits.php?id_skripsi=<?php echo $d['id_skripsi'];?>" class="btn btn-success">Lihat</a>
+                                            <a href="hapuss.php?id_skripsi=<?php echo $d['id_skripsi'];?>" class="btn btn-danger">Hapus</a>
+                                            </td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                    <?php
+                                }
+                                    ?>
+                                </table>
                             </div>
                         </div>
                     </div>
-            </div>
+    </div>
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
@@ -311,18 +338,3 @@ if (!isset($_SESSION['nama'])) {
 </body>
 
 </html>
-
-<?php
-include "config.php";
-if(isset($_POST['submit'])){
-    $nama       = $_POST['nama'];
-    $email       = $_POST['email'];
-    $password      = $_POST['password'];
-
-    mysqli_query($conn, "INSERT INTO admin VALUES('',
-    '$nama','$email', '$password')") 
-    or die(mysql_error($conn));
-
-    echo "<meta http-equiv='refresh' content='1;url=http://localhost/plagiarism/plagiat/admin/admin.php'>";
-}
-?>

@@ -227,18 +227,22 @@ if (!isset($_SESSION['nama'])) {
 
                     <div class="container-fluid">
                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Edit Data Mahasiswa</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Tambah Data Skripsi</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <form method="POST" action="">
                                   <div class="mb-3">
-                                    <label  class="form-label">Nama</label>
-                                    <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukan Nama">
+                                    <label  class="form-label">Judul</label>
+                                    <input type="text" name="judul" class="form-control" id="judul" placeholder="Masukan Judul">
                                   </div>
                                   <div class="mb-3">
-                                  <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                                  <input type="email" name="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                                  <label for="exampleFormControlInput1" class="form-label">Penulis</label>
+                                  <input type="penulis" name="penulis" class="form-control" placeholder="Masukan Nama">
+                                </div>
+                                <div class="mb-3">
+                                  <label  class="form-label">Tahun</label>
+                                  <input type="" name="penulis" class="form-control" placeholder="Masukan Nama">
                                 </div>
                                   <div class="mb-3">
                                     <label  class="form-label">Password</label>

@@ -100,9 +100,9 @@ if (!isset($_SESSION['nama'])) {
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="skripsi.php">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
+                    <span>Skripsi</span></a>
             </li>
 
             <!-- Divider -->
