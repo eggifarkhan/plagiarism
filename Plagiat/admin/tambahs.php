@@ -242,10 +242,10 @@ if (!isset($_SESSION['nama'])) {
                                 </div>
                                 <div class="mb-3">
                                   <label  class="form-label">Tahun</label>
-                                  <input type="" name="penulis" class="form-control" placeholder="Masukan Nama">
+                                  <input type="date" name="penulis" class="form-control" placeholder="Masukan Nama">
                                 </div>
                                   <div class="mb-3">
-                                    <label  class="form-label">Password</label>
+                                    <label  class="form-label">file</label>
                                     <input type="text" name="password" class="form-control" id="password" placeholder="Masukan Password">
                                   </div>
                                   <button type="submit" class="btn btn-primary" name="submit">Submit</button>
