@@ -5,7 +5,12 @@ session_start();
 if (!isset($_SESSION['nama'])) {
     header("Location: dashboard.php");
 }
-
+?>
+<?php
+include "config.php";
+    $id = $_GET['id_skripsi'];
+    $ambil = mysqli_query($conn,"SELECT * FROM data_skripsi WHERE id_skripsi='$id'");
+    $data= mysqli_fetch_array($ambil);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -135,11 +140,6 @@ if (!isset($_SESSION['nama'])) {
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                            
-
-                        <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -229,54 +229,36 @@ if (!isset($_SESSION['nama'])) {
                     </ul>
 
                 </nav>
-                <!-- End of Topbar -->
-                    <!-- Content Row -->
+
                     <div class="container-fluid">
                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Skripsi</h6><br>
-                            <a href="tambahs.php" class="btn btn-primary">Tambah Data</a>
+                            <h6 class="m-0 font-weight-bold text-primary">Edit Data Skripsi</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Judul</th>
-                                            <th>Penulis</th>
-                                            <th>Tanggal</th>
-                                            <th>File</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <?php
-                                    include 'config.php';
-                                    $i = 1;
-                                    $data = mysqli_query($conn, "SELECT * FROM data_skripsi");
-                                    while ($d = mysqli_fetch_array($data)) {
-                                    ?>
-                                    <tbody>
-                                        <tr>
-                                            <td><?php echo $i++?></td>
-                                            <td><?php echo $d['judul'];?></td>
-                                            <td><?php echo $d['penulis'];?></td>
-                                            <td><?php echo $d['tanggal'];?></td>
-                                            <td><?php echo $d['bab1'];?></td>
-                                            <td>
-                                            <a href="edits.php?id_skripsi=<?php echo $d['id_skripsi'];?>" class="btn btn-success">Edit</a>
-                                            <a href="hapuss.php?id_skripsi=<?php echo $d['id_skripsi'];?>" class="btn btn-danger">Hapus</a>
-                                            </td>
-                                        </tr>
-                                        
-                                    </tbody>
-                                    <?php
-                                }
-                                    ?>
-                                </table>
+                                <form method="POST" action="">
+                                  <div class="mb-3">
+                                    <label  class="form-label">Judul</label>
+                                    <input type="text" name="judul" class="form-control" id="judul" value="<?php echo $data['judul'] ?>" >
+                                  </div>
+                                  <div class="mb-3">
+                                    <label  class="form-label">Penulis</label>
+                                    <input type="text" name="penulis" class="form-control" id="penulis" value="<?php echo $data['penulis'] ?>">
+                                  </div>
+                                  <div class="mb-3">
+                                    <label  class="form-label">Tanggal</label>
+                                    <input type="date" name="tanggal" class="form-control" id="tanggal" value="<?php echo $data['tanggal'] ?>">
+                                  </div>
+                                  <div class="mb-3">
+                                    <label  class="form-label">File</label>
+                                    <input type="text" name="bab1" class="form-control" id="bab1" value="<?php echo $data['bab1'] ?>">
+                                  </div>
+                                  <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                                </form>
                             </div>
                         </div>
                     </div>
-    </div>
+            </div>
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
@@ -338,3 +320,18 @@ if (!isset($_SESSION['nama'])) {
 </body>
 
 </html>
+
+<?php
+if(isset($_POST['submit'])){
+    $judul     = $_POST['judul'];
+    $penulis   = $_POST['penulis'];
+    $tanggal   = $_POST['tanggal'];
+    $bab1      = $_POST['bab1'];
+
+    mysqli_query($conn, "UPDATE data_skripsi 
+    SET judul='$judul', penulis='$penulis', tanggal='$tanggal', bab1='$bab1' WHERE id_skripsi='$id' ")
+    or die(mysql_error($conn));
+
+    echo "<meta http-equiv='refresh' content='1;url=http://localhost/plagiarism/plagiat/admin/skripsi.php'>";
+}
+?>

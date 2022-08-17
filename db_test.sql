@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.3.0-dev+20220725.01cf9ce82e
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 16 Agu 2022 pada 17.39
+-- Waktu pembuatan: 17 Agu 2022 pada 21.10
 -- Versi server: 10.4.24-MariaDB
--- Versi PHP: 8.1.4
+-- Versi PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -39,8 +39,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id_admin`, `nama`, `email`, `password`) VALUES
-(1, 'Salwa Fatika', 'fatikasalwa@gmail.com', '111111'),
-(4, 'angel', 'angel@gmail.com', '333333');
+(1, 'Salwa Fatika', 'fatikasalwa@gmail.com', 'admin');
 
 -- --------------------------------------------------------
 
@@ -52,9 +51,16 @@ CREATE TABLE `data_skripsi` (
   `id_skripsi` int(11) NOT NULL,
   `judul` varchar(128) NOT NULL,
   `penulis` varchar(100) NOT NULL,
-  `tahun` year(4) NOT NULL,
-  `file` varchar(128) NOT NULL
+  `tanggal` date NOT NULL,
+  `bab1` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `data_skripsi`
+--
+
+INSERT INTO `data_skripsi` (`id_skripsi`, `judul`, `penulis`, `tanggal`, `bab1`) VALUES
+(1, 'plagiarism', 'ilham', '2022-08-18', 'pembuatan website');
 
 -- --------------------------------------------------------
 
@@ -76,8 +82,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `nim`, `nama`, `email`, `password`, `keterangan`) VALUES
-(1, '18412034', 'ilham sulaiman', 'ilham271015@gmail.com', '000000', 'Belum Lulus'),
-(3, '18412036', 'Muhammad Hikam', 'Hikampengenganteng@gmail.com', '123456', 'Belum Lulus');
+(1, '18412034', 'ilham sulaiman', 'ilham271015@gmail.com', 'user', 'Belum Lulus');
 
 --
 -- Indexes for dumped tables
@@ -115,7 +120,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT untuk tabel `data_skripsi`
 --
 ALTER TABLE `data_skripsi`
-  MODIFY `id_skripsi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_skripsi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`

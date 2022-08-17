@@ -37,12 +37,12 @@ if (isset($_POST['submit'])) {
 
 	<link rel="stylesheet" type="text/css" href="style.css">
 
-	<title>Login</title>
+	<title>Login Admin</title>
 </head>
 <body>
 	<div class="container">
 		<form action="" method="POST" class="login-email">
-			<p class="login-text" style="font-size: 2rem; font-weight: 800;">Login</p>
+			<p class="login-text" style="font-size: 2rem; font-weight: 800;">Login Admin</p>
 			<div class="input-group">
 				<input type="email" placeholder="Masukan Email" name="email" value="<?php echo $email; ?>" required>
 			</div>
@@ -53,6 +53,7 @@ if (isset($_POST['submit'])) {
 				<button name="submit" class="btn">Login</button>
 			</div>
 		</form>
+		<p class="login-register-text">Login Sebagai <a href="index.php">USER</a></p>
 	</div>
 </body>
 </html>

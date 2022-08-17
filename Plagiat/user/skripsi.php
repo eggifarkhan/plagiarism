@@ -7,6 +7,7 @@ if (!isset($_SESSION['nama'])) {
 }
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -155,7 +156,40 @@ if (!isset($_SESSION['nama'])) {
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    ini halaman skripsi
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Data Skripsi</h6>
+                    </div>
+                    <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Judul</th>
+                                            <th>Penulis</th>
+                                            <th>File</th>
+                                        </tr>
+                                    </thead>
+                                    <?php
+                                    include 'config.php';
+                                    $i = 1;
+                                    $data = mysqli_query($conn, "SELECT * FROM data_skripsi");
+                                    while ($d = mysqli_fetch_array($data)) {
+                                    ?>
+                                    <tbody>
+                                        <tr>
+                                            <td><?php echo $i++?></td>
+                                            <td><?php echo $d['judul'];?></td>
+                                            <td><?php echo $d['penulis'];?></td>
+                                            <td><?php echo $d['bab1'];?></td>
+                                        </tr>
+                                    </tbody>
+                                    <?php
+                                }
+                                    ?>
+                                </table>
+                            </div>
+                        </div>
                 </div>
                 <!-- /.container-fluid -->
 

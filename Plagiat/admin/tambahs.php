@@ -244,9 +244,9 @@ if (!isset($_SESSION['nama'])) {
                                   <label  class="form-label">Tanggal</label>
                                   <input type="date" name="date" class="form-control" >
                                 </div>
-                                    <div class="input-group mb-3">
+                                    <div class="mb-3">
                                         <label  class="form-label">File</label>
-                                      <input type="file" name="file" class="form-control" id="inputGroupFile02">    
+                                        <input type="bab1" name="bab1" class="form-control" placeholder="Masukan bab 1 anda">  
                                     </div>
                                   <button type="submit" class="btn btn-primary" name="submit">Submit</button>
                                 </form>
@@ -317,37 +317,18 @@ if (!isset($_SESSION['nama'])) {
 </html>
 
 <?php
-require('class.pdf2text.php');
 include "config.php";
 if(isset($_POST['submit'])){
 
-    $judul       = $_POST['judul'];
-    $penulis       = $_POST['penulis'];
+    $judul     = $_POST['judul'];
+    $penulis   = $_POST['penulis'];
     $date      = $_POST['tahun'];
-    $file      = $_POST['file'];
+    $bab1      = $_POST['bab1'];
 
     mysqli_query($conn, "INSERT INTO data_skripsi VALUES('',
-    '$judul','$penulis', '$tahun', '$file')") 
+    '$judul','$penulis', '$date', '$bab1')") 
     or die(mysql_error($conn));
 
     echo "<meta http-equiv='refresh' content='1;url=http://localhost/plagiarism/plagiat/admin/skripsi.php'>";
-}if(isset($submit)){
-     
-    if($_FILES['file']['type']=="application/pdf") {
-        $a = new PDF2Text();
-        $a->setFilename($_FILES['file']['tmp_name']);
-        $a->decodePDF();
-        echo $a->output();
-
-        $sql = "INSERT INTO skripsi(Penulis, File_skripsi, Tahun) VALUES ('ilham', '".$_FILES['file']['name']."', '2022')";
-        if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
-          } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-          }
-    
-    } else {
-        echo "<p style='color:red; text-align:center'>File harus berformat PDF</p>";
-    }
-}   
+}
 ?>
