@@ -241,13 +241,13 @@ if (!isset($_SESSION['nama'])) {
                                   <input type="penulis" name="penulis" class="form-control" placeholder="Masukan Nama">
                                 </div>
                                 <div class="mb-3">
-                                  <label  class="form-label">Tahun</label>
-                                  <input type="date" name="penulis" class="form-control" placeholder="Masukan Nama">
+                                  <label  class="form-label">Tanggal</label>
+                                  <input type="date" name="date" class="form-control" >
                                 </div>
-                                  <div class="mb-3">
-                                    <label  class="form-label">file</label>
-                                    <input type="files" name="file" class="form-control" id="file" placeholder="Masukan Password">
-                                  </div>
+                                    <div class="input-group mb-3">
+                                        <label  class="form-label">File</label>
+                                      <input type="file" name="file" class="form-control" id="inputGroupFile02">    
+                                    </div>
                                   <button type="submit" class="btn btn-primary" name="submit">Submit</button>
                                 </form>
                             </div>
@@ -317,16 +317,37 @@ if (!isset($_SESSION['nama'])) {
 </html>
 
 <?php
+require('class.pdf2text.php');
 include "config.php";
 if(isset($_POST['submit'])){
-    $nama       = $_POST['nama'];
-    $email       = $_POST['email'];
-    $password      = $_POST['password'];
 
-    mysqli_query($conn, "INSERT INTO admin VALUES('',
-    '$nama','$email', '$password')") 
+    $judul       = $_POST['judul'];
+    $penulis       = $_POST['penulis'];
+    $date      = $_POST['tahun'];
+    $file      = $_POST['file'];
+
+    mysqli_query($conn, "INSERT INTO data_skripsi VALUES('',
+    '$judul','$penulis', '$tahun', '$file')") 
     or die(mysql_error($conn));
 
-    echo "<meta http-equiv='refresh' content='1;url=http://localhost/plagiarism/plagiat/admin/admin.php'>";
-}
+    echo "<meta http-equiv='refresh' content='1;url=http://localhost/plagiarism/plagiat/admin/skripsi.php'>";
+}if(isset($submit)){
+     
+    if($_FILES['file']['type']=="application/pdf") {
+        $a = new PDF2Text();
+        $a->setFilename($_FILES['file']['tmp_name']);
+        $a->decodePDF();
+        echo $a->output();
+
+        $sql = "INSERT INTO skripsi(Penulis, File_skripsi, Tahun) VALUES ('ilham', '".$_FILES['file']['name']."', '2022')";
+        if ($conn->query($sql) === TRUE) {
+            echo "New record created successfully";
+          } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+          }
+    
+    } else {
+        echo "<p style='color:red; text-align:center'>File harus berformat PDF</p>";
+    }
+}   
 ?>
