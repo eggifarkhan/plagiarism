@@ -1,7 +1,7 @@
 <?php
   
 require('class.pdf2text.php');
-require('config.php');
+require('../config.php');
 
 extract($_POST);
  
@@ -33,7 +33,7 @@ if(isset($readpdf)){
 </head>
  
 <body>
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" action="tes_winnowing.php">
         Choose Your File
         <input type="file" name="file" />
         <br>
