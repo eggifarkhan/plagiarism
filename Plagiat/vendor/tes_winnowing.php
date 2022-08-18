@@ -268,13 +268,11 @@ class winnowing {
 	}
 
 	function __construct($w1, $w2){
-		echo "masuk constructor";
 		$this->word1 = $w1;
 		$this->word2 = $w2;
 	}
 
 	public function process(){
-		print_r($this->word1);
 		if (($this->word1 == '') || ($this->word2 == '')) exit;
 
 		//langkah 1 : buang semua huruf yang bukan kelompok [a-z A-Z 0-9] dan ubah menjadi huruf kecil semua (lowercase)
