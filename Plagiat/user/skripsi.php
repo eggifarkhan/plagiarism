@@ -76,8 +76,8 @@ if (!isset($_SESSION['nama'])) {
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Pilih Algoritma:</h6>
-                        <a class="collapse-item" href="winnowing.php">Winnowing</a>
-                        <a class="collapse-item" href="rabin.php">Rabin Karp</a>
+                        <a class="collapse-item" href="winnowing/winnowing.php">Winnowing</a>
+                        <a class="collapse-item" href="rabin/rabin.php">Rabin Karp</a>
                     </div>
                 </div>
             </li>
